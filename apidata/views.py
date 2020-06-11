@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from apidata.models import MainMeal, MainMealInstance, Snack, SnackInstance, Drink, DrinkInstance, Day
-from apidata.serializers import MainMealSerializer, MainMealInstanceSerializer, SnackSerializer, SnackInstanceSerializer, DrinkSerializer, DrinkInstanceSerializer, DaySerializer
-from django.db.models import F, Count
+from apidata.serializers import MainMealSerializer, MainMealInstanceSerializer, SnackSerializer, SnackInstanceSerializer, DrinkSerializer, DrinkInstanceSerializer, DaySerializer, UserDataSerializer, MyTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Create your views here.
 class MainMealViewset(viewsets.ModelViewSet):
   queryset = MainMeal.objects.all()
   serializer_class = MainMealSerializer
-  #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def get_queryset(self):
     queryset = self.queryset
@@ -60,7 +62,7 @@ class MainMealViewset(viewsets.ModelViewSet):
 class MainMealInstanceViewset(viewsets.ModelViewSet):
   queryset = MainMealInstance.objects.all()
   serializer_class = MainMealInstanceSerializer
-  #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def perform_create(self, serializer):
     instance = serializer.save()
@@ -77,7 +79,7 @@ class MainMealInstanceViewset(viewsets.ModelViewSet):
 class SnackViewset(viewsets.ModelViewSet):
   queryset = Snack.objects.all()
   serializer_class = SnackSerializer
-  #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def get_queryset(self):
     queryset = self.queryset
@@ -128,7 +130,7 @@ class SnackViewset(viewsets.ModelViewSet):
 class SnackInstanceViewset(viewsets.ModelViewSet):
   queryset = SnackInstance.objects.all()
   serializer_class = SnackInstanceSerializer
-  #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def perform_create(self, serializer):
     instance = serializer.save()
@@ -145,7 +147,7 @@ class SnackInstanceViewset(viewsets.ModelViewSet):
 class DrinkViewset(viewsets.ModelViewSet):
   queryset = Drink.objects.all()
   serializer_class = DrinkSerializer
-  #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def get_queryset(self):
     queryset = self.queryset
@@ -196,7 +198,7 @@ class DrinkViewset(viewsets.ModelViewSet):
 class DrinkInstanceViewset(viewsets.ModelViewSet):
   queryset = DrinkInstance.objects.all()
   serializer_class = DrinkInstanceSerializer
-  #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def perform_create(self, serializer):
     instance = serializer.save()
@@ -213,7 +215,7 @@ class DrinkInstanceViewset(viewsets.ModelViewSet):
 class DayViewset(viewsets.ModelViewSet):
   queryset = Day.objects.all()
   serializer_class = DaySerializer
-  #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def get_queryset(self):
     queryset = self.queryset
@@ -251,4 +253,11 @@ class DayViewset(viewsets.ModelViewSet):
       queryset = queryset.order_by(order)
       
     return queryset
-  
+
+class UserDataView(APIView):
+  def get(self, request):
+    serializer = UserDataSerializer(request.user)
+    return Response(serializer.data)
+    
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from apidata.models import MainMeal, MainMealInstance, Snack, SnackInstance, Drink, DrinkInstance, Day
 from django.urls import reverse
+from django.contrib.auth.models import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class MainMealSerializer(serializers.HyperlinkedModelSerializer):
   days = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='day-detail')
@@ -125,3 +127,19 @@ class DaySerializer(serializers.HyperlinkedModelSerializer):
       set.append(str(i))
       
     return set[0:100]
+    
+    
+class UserDataSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
+    fields = ['id', 'username']
+    
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+        data['username'] = self.user.username
+
+        return data
