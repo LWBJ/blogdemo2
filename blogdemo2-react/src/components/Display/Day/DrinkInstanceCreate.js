@@ -12,7 +12,7 @@ class DrinkInstanceCreate extends React.Component {
     }
     
     async getDrinks() {
-        let url = 'http://127.0.0.1:8000/apidata/Drink/?page='
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/Drink/?page='
         let drinkSet = []
         
         let pageNo = 1
@@ -49,7 +49,7 @@ class DrinkInstanceCreate extends React.Component {
     
     async handleSubmit(values) {
         this.props.setLoading()
-        let url = 'http://127.0.0.1:8000/apidata/DrinkInstance/'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/DrinkInstance/'
         let access = await this.props.checkAuth()
         
         if (!access) {

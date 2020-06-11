@@ -16,7 +16,8 @@ class LoginControl extends React.Component {
             return null
         }
         
-        let url = 'http://127.0.0.1:8000/apidata/token'
+        this.setState({responseOK: <p>Loading...</p>})
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/token'
         fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -39,6 +40,7 @@ class LoginControl extends React.Component {
         })
         .catch(err => {
             alert('Oops, something went wrong')
+            this.setState({responseOK: null})
         })
     }
     
@@ -48,7 +50,7 @@ class LoginControl extends React.Component {
     }
     
     async checkAuth() {
-        let url = 'http://127.0.0.1:8000/apidata/token-refresh'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/token-refresh'
         let result = await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -66,7 +68,7 @@ class LoginControl extends React.Component {
     async componentDidMount() {
         let access = await this.checkAuth()
         if (access) {
-            let url = 'http://127.0.0.1:8000/apidata/current-user'
+            let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/current-user'
             fetch(url, {
                 headers: {'Authorization': `Bearer ${access}`}
             })
@@ -80,6 +82,8 @@ class LoginControl extends React.Component {
         } else {
             this.handleLogout()
         }
+        
+        this.setState({loading: false})
     }
     
     render() {        

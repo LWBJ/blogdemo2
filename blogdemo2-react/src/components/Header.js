@@ -71,7 +71,7 @@ function Header(props) {
         </div>
         
         <div className='col-auto'>
-          <button className='btn btn-primary mt-2' type='button' data-toggle='modal' data-target='#loginModal'>
+          <button className={'btn mt-2 ' + (props.username ? 'btn-secondary' : 'btn-primary')} type='button' data-toggle='modal' data-target='#loginModal'>
             {props.username? 'Logout' : 'Admin Login'}
           </button>
                 

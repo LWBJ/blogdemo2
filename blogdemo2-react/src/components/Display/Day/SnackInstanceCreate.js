@@ -17,7 +17,7 @@ class SnackInstanceCreate extends React.Component {
       let data
       
       do {
-          let url = 'http://127.0.0.1:8000/apidata/Snack/?page=' + pageNo
+          let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/Snack/?page=' + pageNo
           data= await fetch(url)
             .then(results => results.json())
             .catch(err => {
@@ -52,7 +52,7 @@ class SnackInstanceCreate extends React.Component {
     
     async handleSubmit(values) {
         this.props.setLoading()
-        let url = 'http://127.0.0.1:8000/apidata/SnackInstance/'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/SnackInstance/'
         let access = await this.props.checkAuth()
         
         if (!access) {

@@ -51,7 +51,7 @@ class SnackDisplay extends React.Component {
     }
     
     refreshList() {
-        let url = 'http://127.0.0.1:8000/apidata/Snack/?page=' + this.state.page + '&'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/Snack/?page=' + this.state.page + '&'
         url += 'name=' + this.state.filters.name + '&'
         url += 'lower=' + this.state.filters.lower + '&'
         url += 'greater=' + this.state.filters.greater + '&'

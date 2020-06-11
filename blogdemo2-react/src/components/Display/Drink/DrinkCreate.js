@@ -28,7 +28,7 @@ class DrinkCreate extends React.Component {
     
     async handleSubmit(values) {
         this.props.setLoading()
-        let url = 'http://127.0.0.1:8000/apidata/Drink/'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/Drink/'
         let access = await this.props.checkAuth()
         
         if (!access) {

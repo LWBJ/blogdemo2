@@ -17,7 +17,7 @@ class MealInstanceCreate extends React.Component {
       let data
       
       do {
-          let url = 'http://127.0.0.1:8000/apidata/MainMeal/?page=' + pageNo
+          let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/MainMeal/?page=' + pageNo
           data= await fetch(url)
             .then(results => results.json())
             .catch(err => {
@@ -51,7 +51,7 @@ class MealInstanceCreate extends React.Component {
   }
   
   async onSubmit(values) {
-      let url = 'http://127.0.0.1:8000/apidata/MainMealInstance/'
+      let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/MainMealInstance/'
       this.props.setLoading()
       let access = await this.props.checkAuth()
       

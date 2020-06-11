@@ -57,7 +57,7 @@ class DayDisplay extends  React.Component {
     }
     
     refreshList() {
-        let url = 'http://127.0.0.1:8000/apidata/Day/?page=' + this.state.page + '&'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/Day/?page=' + this.state.page + '&'
         url += 'before=' + this.state.filters.before + '&'
         url += 'after=' + this.state.filters.after + '&'
         url += 'lower=' + this.state.filters.lower + '&'

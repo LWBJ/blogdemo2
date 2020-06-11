@@ -51,7 +51,7 @@ class DrinkDisplay extends React.Component{
     }
     
     refreshList() {
-        let url = 'http://127.0.0.1:8000/apidata/Drink/?page=' + this.state.page + '&'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/Drink/?page=' + this.state.page + '&'
         url +=  'name=' + this.state.filters.name + '&'
         url +=  'before=' + this.state.filters.before + '&'
         url +=  'after=' + this.state.filters.after + '&'

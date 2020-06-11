@@ -27,7 +27,7 @@ class MealCreate extends React.Component {
     
     async handleSubmit(values) {
         this.props.setLoading()
-        let url = 'http://127.0.0.1:8000/apidata/MainMeal/'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/MainMeal/'
         let access = await this.props.checkAuth()
         
         if (!access) {

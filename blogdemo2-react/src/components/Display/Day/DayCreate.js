@@ -10,7 +10,7 @@ class DayCreate extends React.Component {
     }
     
     async onSubmit(values) {
-        let url = 'http://127.0.0.1:8000/apidata/Day/'
+        let url = 'https://lwbjblogdemo2.herokuapp.com/apidata/Day/'
         this.props.setLoading()
         let access = await this.props.checkAuth()
         
